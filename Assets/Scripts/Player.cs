@@ -20,8 +20,6 @@ public class Player : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.K)) Kill();
-
 		switch (State)
 		{
 			case States.Alive:
