@@ -7,13 +7,12 @@ using UnityEngine;
 public class Plateform : MonoBehaviour
 {
 
-	private MeshRenderer MeshR;
+	private SpriteRenderer SpriteR;
 	public PolygonCollider2D[] Colliders { get { return GetComponentsInChildren<PolygonCollider2D>(); } }
 
 	void Awake()
 	{
-		MeshR = GetComponentInChildren<MeshRenderer>();
-		MeshR.material = new Material(MeshR.material);
+		SpriteR = GetComponentInChildren<SpriteRenderer>();
 	}
 
 
@@ -25,7 +24,7 @@ public class Plateform : MonoBehaviour
 	private IEnumerator Logic()
 	{
 		yield return MoveLaPlatform();
-		yield return Effects.LerpColor((c) => MeshR.material.color = c, Color.white, new Color(1, 1, 1, 0), 1);
+		yield return Effects.LerpColor((c) => SpriteR.color= c, Color.white, new Color(1, 1, 1, 0), 1);
 		Destroy(gameObject);
 	}
 
