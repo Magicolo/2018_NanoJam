@@ -10,26 +10,29 @@ public class Player : MonoBehaviour
 
 	public float Speed = 100;
 	public SpriteRenderer Sprite;
+	public Collider2D Collider;
 	public Rigidbody2D Body;
 	public string Horizontal = "Horizontal";
 	public string Vertical = "Vertical";
 
-	States _state = States.Alive;
+	public States State = States.Alive;
 	float _respawn;
 
 	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.K)) Kill();
 
-		switch (_state)
+		switch (State)
 		{
 			case States.Alive:
 				Body.simulated = true;
+				Collider.enabled = true;
 				Sprite.color = Color.Lerp(Sprite.color, Color.white, 3f * Time.deltaTime);
 				break;
 			case States.Dead:
 				_respawn -= Time.deltaTime;
 				Body.simulated = false;
+				Collider.enabled = false;
 				Sprite.color = Color.Lerp(Sprite.color, Color.black, 3f * Time.deltaTime);
 				break;
 		}
@@ -39,7 +42,7 @@ public class Player : MonoBehaviour
 	{
 		var input = new Vector2(Input.GetAxis(Horizontal), Input.GetAxis(Vertical));
 
-		switch (_state)
+		switch (State)
 		{
 			case States.Alive:
 				Body.AddForce(input.normalized * Speed);
@@ -54,14 +57,11 @@ public class Player : MonoBehaviour
 		if (magnitude > Speed) Body.velocity = velocity.normalized * Speed;
 	}
 
-	public void Revive()
-	{
-		_state = States.Alive;
-	}
+	public void Revive() => State = States.Alive;
 
 	public void Kill()
 	{
-		_state = States.Dead;
+		State = States.Dead;
 		_respawn = 1f;
 	}
 }
