@@ -24,7 +24,7 @@ public class Plateform : MonoBehaviour
 	private IEnumerator Logic()
 	{
 		yield return MoveLaPlatform();
-		yield return Effects.LerpColor((c) => SpriteR.color= c, Color.white, new Color(1, 1, 1, 0), 1);
+		yield return Effects.LerpColor((c) => SpriteR.color = c, Color.white, new Color(1, 1, 1, 0), 1);
 		Destroy(gameObject);
 	}
 
@@ -40,17 +40,21 @@ public class Plateform : MonoBehaviour
 		var p = transform.position;
 		transform.position = new Vector3(p.x, p.y, 0);
 
+
 		foreach (var c in Colliders)
 		{
 			var contacts = new Collider2D[16];
 
 			if (c.OverlapCollider(new ContactFilter2D { }, contacts) > 0)
 			{
-				var tokill = contacts.Select(contact => contact?.GetComponentInParent<Player>()).Where(player => player!= null && player.State.Equals(Player.States.Alive));
+				var tokill = contacts.Select(contact => contact?.GetComponentInParent<Player>()).Where(player => player != null && player.State.Equals(Player.States.Alive));
 				foreach (var tk in tokill)
-				tk.Kill();
+					tk.Kill();
 			}
 		}
+
+		foreach (var player in PlateformManager.Instance.AlivePlayer)
+			player.Score++;
 	}
 
 	void Update()

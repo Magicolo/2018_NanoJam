@@ -21,6 +21,9 @@ public class Player : MonoBehaviour
 	public States State = States.Alive;
 	float _respawn;
 
+	public Color PlayerColor;
+	public int Score;
+
 	void Update()
 	{
 		switch (State)
@@ -67,5 +70,6 @@ public class Player : MonoBehaviour
 	{
 		State = States.Dead;
 		_respawn = 1f;
+		Score = 0;
 	}
 }

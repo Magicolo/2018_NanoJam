@@ -55,5 +55,6 @@ MonoBehaviour:
   Players: []
   Plateforms:
   - {fileID: 114054506462093152, guid: eb9298424d5403c449034d45972705c9, type: 2}
-  TimeBetweenPlatform: 5
+  TimeBetweenPlatform: 8
   SpawnDistance: 250
+  OrderInLayer: 10000
