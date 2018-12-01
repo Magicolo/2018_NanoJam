@@ -149,9 +149,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 25
   Sprite: {fileID: 212000820245868118}
+  Collider: {fileID: 58811273464428104}
   Body: {fileID: 50542260502602534}
   Horizontal: Horizontal
   Vertical: Vertical
+  State: 0
 --- !u!212 &212000820245868118
 SpriteRenderer:
   m_ObjectHideFlags: 1
