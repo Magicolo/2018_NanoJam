@@ -12,7 +12,7 @@ public class PlateformManager : Singleton<PlateformManager>
 
 	public Plateform[] Plateforms;
 
-	//public Player[] AlivePlayer{get{ Players.Where(p=>p. }}
+	public Player[] AlivePlayer { get { return Players.Where(p => p.State.Equals(Player.States.Alive)).ToArray(); } }
 
 	public float TimeBetweenPlatform;
 	private float t;
@@ -33,7 +33,7 @@ public class PlateformManager : Singleton<PlateformManager>
 		{
 			t += TimeBetweenPlatform;
 			var p = Plateforms[Random.Range(0, Plateforms.Count())];
-			Instantiate(p , new Vector3(0,0,SpawnDistance), Quaternion.identity);
+			Instantiate(p, new Vector3(0, 0, SpawnDistance), Quaternion.identity);
 		}
 	}
 }

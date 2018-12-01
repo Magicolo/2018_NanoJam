@@ -41,11 +41,13 @@ public class Plateform : MonoBehaviour
 		var p = transform.position;
 		transform.position = new Vector3(p.x, p.y, 0);
 
-		foreach (var player in PlateformManager.Instance.Players)
+		foreach (var player in PlateformManager.Instance.AlivePlayer)
 		{
-			/* if (Colliders.Any((c) => c.IsTouching(player.)){
-				player
-			}*/
+			//Debug.Log("TOUCHE : " + player.Collider.IsTouching(Colliders[0]));
+			if (Colliders.Any((c) => Physics2D.IsTouching(c, player.Collider))){
+				Debug.Log("ASDASDADS");
+				player.Kill();
+			}
 		}
 
 	}
