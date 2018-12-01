@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.K)) Kill(1f);
+		if (Input.GetKeyDown(KeyCode.K)) Kill();
 
 		switch (_state)
 		{
@@ -59,9 +59,9 @@ public class Player : MonoBehaviour
 		_state = States.Alive;
 	}
 
-	public void Kill(float respawn)
+	public void Kill()
 	{
 		_state = States.Dead;
-		_respawn = respawn;
+		_respawn = 1f;
 	}
 }
