@@ -20,7 +20,7 @@ public class SpriteAnimator : MonoBehaviour
 	void Update()
 	{
 		Sprite.flipX = false;
-		if (IsMoving)
+		if (IsMoving && MyPlayer.MoveDirectionHA != 0)
 		{
 			Sprite.flipX = MyPlayer.MoveDirectionHA < 0;
 			var index = (int)(Time.time * Speed) % SpritesTilt.Length;
@@ -28,8 +28,8 @@ public class SpriteAnimator : MonoBehaviour
 		}
 		else
 		{
-			var index = (int)(Time.time * Speed) % SpritesTilt.Length;
-			Sprite.sprite = SpritesTilt[index];
+			var index = (int)(Time.time * Speed) % Sprites.Length;
+			Sprite.sprite = Sprites[index];
 		}
 
 	}

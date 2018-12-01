@@ -18,6 +18,8 @@ public class PlateformManager : Singleton<PlateformManager>
 	private float t;
 	public float SpawnDistance;
 
+	public int OrderInLayer = 10000;
+
 	//public List<LevelElement
 	// Use this for initialization
 	void Start()
@@ -33,6 +35,11 @@ public class PlateformManager : Singleton<PlateformManager>
 		{
 			t += TimeBetweenPlatform;
 			var p = Plateforms[Random.Range(0, Plateforms.Count())];
+
+			var renders = p.GetComponentsInChildren<SpriteRenderer>();
+			foreach (var r in renders)
+				r.sortingOrder = OrderInLayer--;
+
 			Instantiate(p, new Vector3(0, 0, SpawnDistance), Quaternion.identity);
 		}
 	}
