@@ -51,4 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c38712b10110f144db09c53dbe92a897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlateformMoveSpeed: 5
+  PlateformMoveSpeed: -22
+  Players: []
+  Plateforms:
+  - {fileID: 114054506462093152, guid: eb9298424d5403c449034d45972705c9, type: 2}
+  - {fileID: 114203938900646814, guid: 9b9c542ee5cf5bb48a6eff529de1e2a3, type: 2}
+  TimeBetweenPlatform: 5
+  SpawnDistance: 150
