@@ -6,10 +6,9 @@ public class SpriteAnimator : MonoBehaviour
 	public float Speed;
 	public Sprite[] Sprites;
 
-	int _index;
-
 	void Update()
 	{
-
+		var index = (int)(Time.time * Speed) % Sprites.Length;
+		Sprite.sprite = Sprites[index];
 	}
 }
