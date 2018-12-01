@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
 		Dead
 	}
 
+	public bool IsMoving = false;
+	public float MoveDirectionHA;
+
 	public float Speed = 100;
 	public SpriteRenderer Sprite;
 	public Collider2D Collider;
@@ -39,13 +42,16 @@ public class Player : MonoBehaviour
 	void FixedUpdate()
 	{
 		var input = new Vector2(Input.GetAxis(Horizontal), Input.GetAxis(Vertical));
-
+		MoveDirectionHA = 0;
+		MoveDirectionHA = input.x;
 		switch (State)
 		{
 			case States.Alive:
+				IsMoving = input.magnitude > 0;
 				Body.AddForce(input.normalized * Speed);
 				break;
 			case States.Dead:
+				IsMoving = false;
 				if (_respawn <= 0f && input.magnitude > 0.1f) Revive();
 				break;
 		}
