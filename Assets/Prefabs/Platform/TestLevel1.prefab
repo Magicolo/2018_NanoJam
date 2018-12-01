@@ -192,5 +192,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e05d5c38103e4b643839a91f2949f0ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mesh: {fileID: 0}
-  Collider: {fileID: 0}
+  Mesh: {fileID: 23484396401283002}
+  Collider: {fileID: 60949688473807316}
