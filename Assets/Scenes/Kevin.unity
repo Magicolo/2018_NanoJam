@@ -263,15 +263,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4774143471750522, guid: beb1f11677e0d3948adc93a0162e13f8, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -223.14499
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4774143471750522, guid: beb1f11677e0d3948adc93a0162e13f8, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 5.0333385
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4774143471750522, guid: beb1f11677e0d3948adc93a0162e13f8, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 79.38379
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4774143471750522, guid: beb1f11677e0d3948adc93a0162e13f8, type: 2}
       propertyPath: m_LocalRotation.x
@@ -292,14 +292,6 @@ Prefab:
     - target: {fileID: 4774143471750522, guid: beb1f11677e0d3948adc93a0162e13f8, type: 2}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4597885179722130, guid: beb1f11677e0d3948adc93a0162e13f8, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 227.71
-      objectReference: {fileID: 0}
-    - target: {fileID: 4597885179722130, guid: beb1f11677e0d3948adc93a0162e13f8, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -6.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beb1f11677e0d3948adc93a0162e13f8, type: 2}
@@ -425,21 +417,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4120933823705504, guid: 11d91bed17bf56b43aeea8c009d0e743, type: 2}
       propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 20013042648512628, guid: 11d91bed17bf56b43aeea8c009d0e743,
-        type: 2}
-      propertyPath: m_BackGroundColor.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 20013042648512628, guid: 11d91bed17bf56b43aeea8c009d0e743,
-        type: 2}
-      propertyPath: m_BackGroundColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 20013042648512628, guid: 11d91bed17bf56b43aeea8c009d0e743,
-        type: 2}
-      propertyPath: m_BackGroundColor.b
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
