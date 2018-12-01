@@ -41,15 +41,17 @@ public class Plateform : MonoBehaviour
 		var p = transform.position;
 		transform.position = new Vector3(p.x, p.y, 0);
 
-		foreach (var player in PlateformManager.Instance.AlivePlayer)
+		foreach (var c in Colliders)
 		{
-			//Debug.Log("TOUCHE : " + player.Collider.IsTouching(Colliders[0]));
-			if (Colliders.Any((c) => Physics2D.IsTouching(c, player.Collider))){
-				Debug.Log("ASDASDADS");
-				player.Kill();
+			var contacts = new Collider2D[16];
+
+			if (c.OverlapCollider(new ContactFilter2D { }, contacts) > 0)
+			{
+				var tokill = contacts.Select(contact => contact?.GetComponentInParent<Player>()).Where(player => player!= null && player.State.Equals(Player.States.Alive));
+				foreach (var tk in tokill)
+				tk.Kill();
 			}
 		}
-
 	}
 
 	void Update()
