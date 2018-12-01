@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelElement : MonoBehaviour {
+public class Plateform : MonoBehaviour {
 
 	public MeshRenderer Mesh;
 	public PolygonCollider2D Collider;
