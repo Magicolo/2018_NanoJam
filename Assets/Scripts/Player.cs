@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -24,13 +22,14 @@ public class Player : MonoBehaviour
 
 	public States State = States.Alive;
 	float _respawn;
+	Transform _killer;
 
 	public Color PlayerColor;
 	public int Score;
 
 	private IEnumeratorQueue Animations = new IEnumeratorQueue();
 
-	public bool IsAlive { get { return State == States.Alive; } }
+	public bool IsAlive => State == States.Alive;
 
 	void Update()
 	{
@@ -63,6 +62,12 @@ public class Player : MonoBehaviour
 				break;
 			case States.Dead:
 				IsMoving = false;
+				if (_killer)
+				{
+					var position = transform.position;
+					position.z = _killer.position.z - 2f;
+					transform.position = position;
+				}
 				if (_respawn <= 0f && input.magnitude > 0.1f) Revive();
 				break;
 		}
@@ -76,13 +81,19 @@ public class Player : MonoBehaviour
 	{
 		State = States.Alive;
 		Animator.enabled = true;
+
+		var position = transform.position;
+		position.z = 0f;
+		transform.position = position;
+
 		Animations.Enqueue(ShowAnimation());
 	}
 
-	public void Kill()
+	public void Kill(Transform killer)
 	{
 		State = States.Dead;
 		_respawn = 1f;
+		_killer = killer;
 		Score = 0;
 		Animations.Enqueue(KillAnimation());
 	}
@@ -102,7 +113,7 @@ public class Player : MonoBehaviour
 	{
 		Animator.enabled = true;
 		Animator.Sprite.sprite = Animator.Sprites[0];
-		foreach (var _ in  Effects.LerpColor(ChangeColor, new Color(0, 0, 0, 0), Color.white, 1))
+		foreach (var _ in Effects.LerpColor(ChangeColor, new Color(0, 0, 0, 0), Color.white, 1))
 		{
 			yield return null;
 		}

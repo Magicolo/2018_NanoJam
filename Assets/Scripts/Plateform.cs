@@ -42,7 +42,7 @@ public class Plateform : MonoBehaviour
 			if (c.OverlapCollider(new ContactFilter2D { }, contacts) > 0)
 			{
 				var tokill = contacts.Select(contact => contact?.GetComponentInParent<Player>()).Where(player => player != null && player.State.Equals(Player.States.Alive));
-				foreach (var tk in tokill) tk.Kill();
+				foreach (var tk in tokill) tk.Kill(transform);
 			}
 		}
 	}
