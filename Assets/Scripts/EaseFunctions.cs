@@ -45,19 +45,19 @@ public static class EaseFunctions
 
 
 	public static float SmoothStart2(float t) => t * t;
-	public static float SmoothStart3(float t) => t * t *t;
-	public static float SmoothStart4(float t) => t * t *t *t;
-	public static float SmoothStart5(float t) => t * t*t*t*t;
+	public static float SmoothStart3(float t) => t * t * t;
+	public static float SmoothStart4(float t) => t * t * t * t;
+	public static float SmoothStart5(float t) => t * t * t * t * t;
 
 	public static float SmoothStop2(float t) => 1 - (1 - t) * (1 - t);
 	public static float SmoothStop3(float t) => 1 - (1 - t) * (1 - t) * (1 - t);
 	public static float SmoothStop4(float t) => 1 - Mathf.Pow((1 - t), 4);
 	public static float SmoothStop5(float t) => 1 - Mathf.Pow((1 - t), 5);
 
-	public static float SmoothStep2(float t) => 1 - CrossFade(SmoothStart2,SmoothStop2,t);
-	public static float SmoothStep3(float t) => 1 - CrossFade(SmoothStart3,SmoothStop3,t);
-	public static float SmoothStep4(float t) => 1 - CrossFade(SmoothStart4,SmoothStop4,t);
-	public static float SmoothStep5(float t) => 1 - CrossFade(SmoothStart5,SmoothStop5,t);
+	public static float SmoothStep2(float t) => 1 - CrossFade(SmoothStart2, SmoothStop2, t);
+	public static float SmoothStep3(float t) => 1 - CrossFade(SmoothStart3, SmoothStop3, t);
+	public static float SmoothStep4(float t) => 1 - CrossFade(SmoothStart4, SmoothStop4, t);
+	public static float SmoothStep5(float t) => 1 - CrossFade(SmoothStart5, SmoothStop5, t);
 
 
 	public static float Mix(Func<float, float> a, Func<float, float> b, float bWeight, float t) => (1 - bWeight) * a(t) + (bWeight) * b(t);
