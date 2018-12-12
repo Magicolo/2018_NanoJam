@@ -1,30 +1,21 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Linq;
 using UnityEngine;
 
 public class Plateform : MonoBehaviour
 {
+	public SpriteRenderer Sprite;
+	public SpriteMask Mask;
+	public PolygonCollider2D[] Colliders => GetComponentsInChildren<PolygonCollider2D>();
 
-	private SpriteRenderer SpriteR;
-	public PolygonCollider2D[] Colliders { get { return GetComponentsInChildren<PolygonCollider2D>(); } }
+	bool _hasKilled;
 
-	void Awake()
-	{
-		SpriteR = GetComponentInChildren<SpriteRenderer>();
-	}
-
-
-	void Start()
-	{
-		StartCoroutine(Logic());
-	}
+	//void Start() => StartCoroutine(Logic());
 
 	private IEnumerator Logic()
 	{
 		yield return MoveLaPlatform();
-		yield return Effects.LerpColor((c) => SpriteR.color = c, Color.white, new Color(1, 1, 1, 0), 1);
+		yield return Effects.LerpColor((c) => Sprite.color = c, Color.white, new Color(1, 1, 1, 0), 1);
 		Destroy(gameObject);
 	}
 
@@ -39,8 +30,11 @@ public class Plateform : MonoBehaviour
 
 		var p = transform.position;
 		transform.position = new Vector3(p.x, p.y, 0);
+		KillPlayers();
+	}
 
-
+	void KillPlayers()
+	{
 		foreach (var c in Colliders)
 		{
 			var contacts = new Collider2D[16];
@@ -48,17 +42,17 @@ public class Plateform : MonoBehaviour
 			if (c.OverlapCollider(new ContactFilter2D { }, contacts) > 0)
 			{
 				var tokill = contacts.Select(contact => contact?.GetComponentInParent<Player>()).Where(player => player != null && player.State.Equals(Player.States.Alive));
-				foreach (var tk in tokill)
-					tk.Kill();
+				foreach (var tk in tokill) tk.Kill();
 			}
 		}
-
-		foreach (var player in PlateformManager.Instance.AlivePlayer)
-			player.Score++;
 	}
 
 	void Update()
 	{
-
+		if (transform.position.z < 0f && !_hasKilled)
+		{
+			_hasKilled = true;
+			KillPlayers();
+		}
 	}
 }
