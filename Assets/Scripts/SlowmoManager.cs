@@ -1,13 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Linq;
 using UnityEngine;
-using System.Linq;
 
 public class SlowmoManager : Singleton<SlowmoManager>
 {
 
 	public float SlowmoStartDistance;
 	public float MaxDistanceDistance;
+	public float SlowExponent = 0.75f;
+	public float SlowRatio = 0.25f;
 
 	void Update()
 	{
@@ -15,7 +15,7 @@ public class SlowmoManager : Singleton<SlowmoManager>
 		if (plateforms.Count() != 0)
 		{
 			var first = plateforms.First();
-			float z = first.transform.position.z;
+			var z = first.transform.position.z;
 			if (z < SlowmoStartDistance && z > MaxDistanceDistance)
 			{
 				float t = 0;
@@ -24,9 +24,11 @@ public class SlowmoManager : Singleton<SlowmoManager>
 				else
 					t = z / MaxDistanceDistance;
 
-				float lerpsed = EaseFunctions.SmoothStart5(t) * 0.5f;
+				//var lerpsed = EaseFunctions.SmoothStart5(t) * 0.5f;
+				var lerpsed = (1f - Mathf.Pow(1f - t, SlowExponent)) * SlowRatio;
+
 				//Debug.Log("t :" + t);
-				Time.timeScale = 0.5f + lerpsed;
+				Time.timeScale = (1f - SlowRatio) + lerpsed;
 			}
 			else
 			{

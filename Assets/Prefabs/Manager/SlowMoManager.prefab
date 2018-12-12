@@ -43,5 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c0ec9ef72574b4890d0f9521321a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlowmoStartDistance: 15
-  MaxDistanceDistance: -10
+  SlowmoStartDistance: 30
+  MaxDistanceDistance: 0
+  SlowExponent: 0.75
+  SlowRatio: 0.5
