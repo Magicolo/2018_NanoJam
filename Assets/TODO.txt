@@ -1,0 +1,18 @@
+ART:
+- Textures for tunnel
+- Blood particles on death
+- Shine FX on repulsion
+
+AUDIO
+- SFX
+- Musix
+
+FEATURES
+- Repulsion when players hit each other
+- Fade in at beginning of game to hide tunnel warmup
+- More obstacles
+- Score:
+	- 1 for each player
+	- as long as you're alive, score increases
+	- when all players are dead, game ends
+- Bug: spawning players are splatted

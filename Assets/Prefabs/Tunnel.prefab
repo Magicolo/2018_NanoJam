@@ -47,6 +47,7 @@ MonoBehaviour:
     type: 3}
   Obstacles:
   - {fileID: 114054506462093152, guid: eb9298424d5403c449034d45972705c9, type: 3}
+  - {fileID: 114054506462093152, guid: 7598d50b7f131ee4b81d22432fd62473, type: 3}
   Frequency: 15
   Duration: 3
   RandomColor: 0.051
