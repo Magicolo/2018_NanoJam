@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
 				if (_killer)
 				{
 					var position = transform.position;
-					position.z = _killer.position.z - 2f;
+					position.z = _killer.position.z - 2.5f;
 					transform.position = position;
 				}
 				if (_respawn <= 0f && input.magnitude > 0.1f) Revive();
