@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -15,6 +18,7 @@ public class Player : MonoBehaviour
 	public SpriteRenderer Sprite;
 	public Collider2D Collider;
 	public Rigidbody2D Body;
+	public SpriteAnimator Animator;
 	public string Horizontal = "Horizontal";
 	public string Vertical = "Vertical";
 
@@ -24,6 +28,10 @@ public class Player : MonoBehaviour
 	public Color PlayerColor;
 	public int Score;
 
+	private IEnumeratorQueue Animations = new IEnumeratorQueue();
+
+	public bool IsAlive { get { return State == States.Alive; } }
+
 	void Update()
 	{
 		switch (State)
@@ -31,15 +39,15 @@ public class Player : MonoBehaviour
 			case States.Alive:
 				Body.simulated = true;
 				Collider.enabled = true;
-				Sprite.color = Color.Lerp(Sprite.color, Color.white, 3f * Time.deltaTime);
 				break;
 			case States.Dead:
 				_respawn -= Time.deltaTime;
 				Body.simulated = false;
 				Collider.enabled = false;
-				Sprite.color = Color.Lerp(Sprite.color, Color.black, 3f * Time.deltaTime);
 				break;
 		}
+
+		Animations.Update();
 	}
 
 	void FixedUpdate()
@@ -64,12 +72,43 @@ public class Player : MonoBehaviour
 		if (magnitude > Speed) Body.velocity = velocity.normalized * Speed;
 	}
 
-	public void Revive() => State = States.Alive;
+	public void Revive()
+	{
+		State = States.Alive;
+		Animator.enabled = true;
+		Animations.Enqueue(ShowAnimation());
+	}
 
 	public void Kill()
 	{
 		State = States.Dead;
 		_respawn = 1f;
 		Score = 0;
+		Animations.Enqueue(KillAnimation());
 	}
+
+	IEnumerator KillAnimation()
+	{
+		Animator.enabled = false;
+		Animator.Sprite.sprite = Animator.DeathSprite;
+		foreach (var _ in Effects.LerpColor(ChangeColor, Color.white, Color.black, 1))
+			yield return null;
+		foreach (var _ in (Effects.LerpColor(ChangeColor, Color.black, new Color(0, 0, 0, 0), 0.5f)))
+			yield return null;
+	}
+
+
+	IEnumerator ShowAnimation()
+	{
+		Animator.enabled = true;
+		Animator.Sprite.sprite = Animator.Sprites[0];
+		foreach (var _ in  Effects.LerpColor(ChangeColor, new Color(0, 0, 0, 0), Color.white, 1))
+		{
+			yield return null;
+		}
+
+	}
+
+	void ChangeColor(Color color) => Animator.Sprite.color = color;
+
 }
