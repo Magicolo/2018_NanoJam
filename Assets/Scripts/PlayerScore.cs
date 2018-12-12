@@ -14,7 +14,7 @@ public class PlayerScore : MonoBehaviour
 
 	private Color BaseColor;
 
-	private Queue<IEnumerator> ToAnimate = new Queue<IEnumerator>();
+	private Queue<IEnumerable> ToAnimate = new Queue<IEnumerable>();
 	private IEnumerator CurrentAnimation;
 
 	private Player.States LastKnownState = Player.States.Dead;
@@ -33,7 +33,7 @@ public class PlayerScore : MonoBehaviour
 		ScoreText.enabled = false;
 	}
 
-	IEnumerator AnimateScore(int newScore)
+	IEnumerable AnimateScore(int newScore)
 	{
 		ScoreText.text = newScore + "";
 		yield return null;
@@ -71,7 +71,7 @@ public class PlayerScore : MonoBehaviour
 		}
 
 		if (ToAnimate.Count != 0 && CurrentAnimation == null)
-			CurrentAnimation = ToAnimate.Dequeue();
+			CurrentAnimation = ToAnimate.Dequeue().GetEnumerator();
 
 		if (CurrentAnimation != null && !CurrentAnimation.MoveNext())
 			CurrentAnimation = null;

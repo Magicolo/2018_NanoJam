@@ -5,7 +5,6 @@ using UnityEngine;
 
 public static class Effects
 {
-
 	public static IEnumerable LerpColor(Action<Color> ToColor, Color from, Color to, float duration)
 	{
 		float t = 0;
@@ -19,5 +18,4 @@ public static class Effects
 		}
 		ToColor(to);
 	}
-
 }
