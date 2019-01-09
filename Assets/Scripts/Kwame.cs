@@ -8,22 +8,12 @@ public class Kwame : MonoBehaviour
 	public SpriteRenderer SR;
 	public Plateform CurrentPlateform;
 
-	// Start is called before the first frame update
-	void Start()
-	{
 
-	}
-
-	// Update is called once per frame
 	void Update()
 	{
-		/* 	if (Input.GetKeyDown(KeyCode.Space))
-			{ */
 
 		var plateformPX = CurrentPlateform.Sprite.sprite.texture.GetPixels();
 		var plateformPPU = CurrentPlateform.Sprite.sprite.pixelsPerUnit;
-
-
 
 
 
@@ -77,6 +67,5 @@ public class Kwame : MonoBehaviour
 		Sprite s = Sprite.Create(txt, new Rect(0.0f, 0.0f, 128, 128), new Vector2(0.5f, 0.5f), 8);
 		SR.sprite = s;
 
-		/* } */
 	}
 }
