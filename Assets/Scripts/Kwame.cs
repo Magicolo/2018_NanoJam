@@ -20,7 +20,6 @@ public class Kwame : MonoBehaviour
 		/* 	if (Input.GetKeyDown(KeyCode.Space))
 			{ */
 
-
 		var plateformPX = CurrentPlateform.Sprite.sprite.texture.GetPixels();
 		var plateformPPU = CurrentPlateform.Sprite.sprite.pixelsPerUnit;
 
@@ -74,12 +73,6 @@ public class Kwame : MonoBehaviour
 			}
 		}
 
-		/* for (int i = 0; i < 128; i++)
-		{
-			txt.SetPixel(0, i, Color.green);
-			txt.SetPixel(64, i, Color.green);
-			txt.SetPixel(127, i, Color.green);
-		} */
 		txt.Apply();
 		Sprite s = Sprite.Create(txt, new Rect(0.0f, 0.0f, 128, 128), new Vector2(0.5f, 0.5f), 8);
 		SR.sprite = s;
