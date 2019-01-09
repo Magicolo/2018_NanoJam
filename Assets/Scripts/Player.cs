@@ -72,10 +72,6 @@ public class Player : MonoBehaviour
                 if (_respawn <= 0f && input.magnitude > 0.1f) Revive();
                 break;
         }
-
-        // var velocity = Body.velocity;
-        // var magnitude = velocity.magnitude;
-        // if (magnitude > Speed) Body.velocity = velocity.normalized * Speed;
     }
 
     public void Revive()
@@ -95,7 +91,6 @@ public class Player : MonoBehaviour
         State = States.Dead;
         _respawn = 1f;
         _killer = killer;
-        Score = 0;
         Animations.Enqueue(KillAnimation());
     }
 
@@ -122,7 +117,7 @@ public class Player : MonoBehaviour
 
     IEnumerator BumpRoutine(Player player, ContactPoint2D[] contacts)
     {
-        var modifier = player.Body.velocity.magnitude * Bump;
+        var modifier = Body.velocity.magnitude * Bump;
         yield return null;
 
         foreach (var contact in contacts)
