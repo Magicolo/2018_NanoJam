@@ -2,21 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Environnement : MonoBehaviour
+public class Level : MonoBehaviour
 {
 
     public List<Sprite> Obstacles = new List<Sprite>();
     public List<Sprite> Tunnels = new List<Sprite>();
 
 
-    void Start()
-    {
-        
-    }
-
-
-    void Update()
-    {
-        
-    }
 }

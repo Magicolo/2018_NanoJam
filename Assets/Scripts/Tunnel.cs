@@ -32,7 +32,7 @@ public class Tunnel : MonoBehaviour
 
 		while (_nextBackground <= Time.time)
 		{
-			var nextTunnelSprite = EnvironnementManager.Instance.NextTunnel;
+			var nextTunnelSprite = LevelManager.Instance.NextTunnel;
 
 			_nextBackground += 1f / Frequency;
 			var target = new Vector3(0f, 0f, -25f);
@@ -44,7 +44,7 @@ public class Tunnel : MonoBehaviour
 
 			if (_nextObstacle <= Time.time && SpawnObstacles)
 			{
-				var nextObstacleSprite = EnvironnementManager.Instance.NextObstacle;
+				var nextObstacleSprite = LevelManager.Instance.NextObstacle;
 				_nextObstacle += 5f;
 				var obstacle = Instantiate(ObstaclePrefab, transform);
 				obstacle.Mask.sprite = spriteRenderer.sprite;

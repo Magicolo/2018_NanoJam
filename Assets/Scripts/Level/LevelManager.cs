@@ -6,16 +6,16 @@ using UnityEditor;
 using UnityEngine;
 
 [ExecuteInEditMode()]
-public class EnvironnementManager : Singleton<EnvironnementManager>
+public class LevelManager : Singleton<LevelManager>
 {
 
-	public Dictionary<string, Environnement> Environnements = new Dictionary<string, Environnement>();
+	public Dictionary<string, Level> Levels = new Dictionary<string, Level>();
 
 	public Sprite NextTunnel
 	{
 		get
 		{
-			var env = Environnements.First().Value;
+			var env = Levels.First().Value;
 			return env.Tunnels[UnityEngine.Random.Range(0, env.Tunnels.Count)];
 		}
 	}
@@ -24,7 +24,7 @@ public class EnvironnementManager : Singleton<EnvironnementManager>
 	{
 		get
 		{
-			var env = Environnements.First().Value;
+			var env = Levels.First().Value;
 			return env.Obstacles[UnityEngine.Random.Range(0, env.Obstacles.Count)];
 		}
 	}

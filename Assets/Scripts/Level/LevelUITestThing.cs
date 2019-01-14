@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnvironnmentUITestThing : MonoBehaviour
+public class LevelUITestThing : MonoBehaviour
 {
 
 	public Text Text;
@@ -17,7 +17,7 @@ public class EnvironnmentUITestThing : MonoBehaviour
 
 	void Update()
 	{
-		var env = EnvironnementManager.Instance.Environnements;
+		var env = LevelManager.Instance.Levels;
         if(env.Count == 0)
             Text.text = "Missing Environnement or Loading";
             else

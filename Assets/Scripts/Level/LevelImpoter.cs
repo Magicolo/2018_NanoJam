@@ -7,12 +7,12 @@ using UnityEngine.Networking;
 using System.Linq;
 using System.Diagnostics;
 
-public class EnvironnmentImpoter : MonoBehaviour
+public class LevelImpoter : MonoBehaviour
 {
 	public float TunnelPixelsPerUnit = 16;
 	public float ObstaclePixelsPerUnit = 16;
 
-	private static string EnvironnementPath = Application.streamingAssetsPath + "\\Environnements";
+	private static string LevelPath = Application.streamingAssetsPath + "\\Levels";
 
 
 	public bool Import;
@@ -26,7 +26,7 @@ public class EnvironnmentImpoter : MonoBehaviour
 			else
 				Destroy(transform.GetChild(i).gameObject);
 		}
-		StartCoroutine(LoadAllEnvironnement().GetEnumerator());
+		StartCoroutine(LoadAllLevels().GetEnumerator());
 	}
 	void Start()
 	{
@@ -41,10 +41,10 @@ public class EnvironnmentImpoter : MonoBehaviour
 		if (!Import)
 			return;
 
-		StartCoroutine(LoadAllEnvironnement().GetEnumerator());
+		StartCoroutine(LoadAllLevels().GetEnumerator());
 	}
 
-	IEnumerable LoadAllEnvironnement()
+	IEnumerable LoadAllLevels()
 	{
 		Import = false;
 		File.WriteAllText(Application.streamingAssetsPath + "\\log.txt", "");
@@ -52,32 +52,33 @@ public class EnvironnmentImpoter : MonoBehaviour
 		Stopwatch watch = new Stopwatch();
 		watch.Start();
 
-		var managerEnvs = EnvironnementManager.Instance.Environnements;
+		var levelDictionary = LevelManager.Instance.Levels;
 
-		DirectoryInfo directoryInfo = new DirectoryInfo(EnvironnementPath);
-		outprint("Streaming Assets Path: " + EnvironnementPath);
+		DirectoryInfo directoryInfo = new DirectoryInfo(LevelPath);
+		outprint("Streaming Assets Path: " + LevelPath);
 		outprint(directoryInfo.GetDirectories().Count() + " folders to parse");
-		foreach (var environnementFolder in directoryInfo.GetDirectories())
+		foreach (var levelFolder in directoryInfo.GetDirectories())
 		{
-			var envName = environnementFolder.Name;
-			Environnement environnement = null; ;
-			if (managerEnvs.ContainsKey(envName))
+			var envName = levelFolder.Name;
+			Level level = null; ;
+			if (levelDictionary.ContainsKey(envName))
 			{
-				outprint("Refreshing environnement : " + envName);
-				environnement = transform.Find(envName).GetComponent<Environnement>();
+				outprint("Refreshing level : " + envName);
+				level = transform.Find(envName).GetComponent<Level>();
 			}
 			else
 			{
+				outprint("New level : " + envName);
 				var newGo = new GameObject(envName);
 				newGo.transform.parent = this.transform;
-				environnement = newGo.AddComponent<Environnement>();
+				level = newGo.AddComponent<Level>();
 			
-				managerEnvs.Add(envName, environnement);
+				levelDictionary.Add(envName, level);
 			}
 
 
-			environnement.Obstacles = LoadSprites(environnementFolder + "\\Obstacles", ObstaclePixelsPerUnit);
-			environnement.Tunnels = LoadSprites(environnementFolder + "\\Tunnels", TunnelPixelsPerUnit);
+			level.Obstacles = LoadSprites(levelFolder + "\\Obstacles", ObstaclePixelsPerUnit);
+			level.Tunnels = LoadSprites(levelFolder + "\\Tunnels", TunnelPixelsPerUnit);
 
 
 			watch.Stop();
