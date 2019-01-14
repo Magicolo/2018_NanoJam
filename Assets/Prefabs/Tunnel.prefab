@@ -45,9 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Particle: {fileID: 7161639780491250839, guid: 98caed4c15784c741b019f345338641a,
     type: 3}
-  Obstacles:
-  - {fileID: 114054506462093152, guid: eb9298424d5403c449034d45972705c9, type: 3}
-  - {fileID: 114054506462093152, guid: 7598d50b7f131ee4b81d22432fd62473, type: 3}
+  ObstaclePrefab: {fileID: 7200968549711010483, guid: 0297309e468acf148b157334ff1d97db,
+    type: 3}
   Frequency: 15
   Duration: 3
   RandomColor: 0.051
@@ -113,3 +112,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  SpawnObstacles: 1

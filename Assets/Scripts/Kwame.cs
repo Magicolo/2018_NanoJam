@@ -36,8 +36,8 @@ public class Kwame : MonoBehaviour
 			var playerPPU = p.Sprite.sprite.pixelsPerUnit;
 			var pRect = p.Sprite.sprite.textureRect;
 
-			int px = (int)((p.transform.position.x + 7.3) * playerPPU);
-			int py = (int)((p.transform.position.y + 7.3) * playerPPU);
+			int px = (int)((p.transform.position.x + 12) * playerPPU);
+			int py = (int)((p.transform.position.y + 12) * playerPPU);
 
 
 
@@ -64,7 +64,7 @@ public class Kwame : MonoBehaviour
 		}
 
 		txt.Apply();
-		Sprite s = Sprite.Create(txt, new Rect(0.0f, 0.0f, 128, 128), new Vector2(0.5f, 0.5f), 8);
+		Sprite s = Sprite.Create(txt, new Rect(0.0f, 0.0f, 128, 128), new Vector2(0.5f, 0.5f), 5);
 		SR.sprite = s;
 
 	}

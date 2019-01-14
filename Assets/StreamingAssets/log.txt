@@ -1,0 +1,6 @@
+Streaming Assets Path: C:/Users/Richard/Documents/Workspaces/2018_NanoJam/Assets/StreamingAssets\Levels
+1 folders to parse
+New level : Dirt
+1 Sprites to load
+2 Sprites to load
+Importing Done in 0s
