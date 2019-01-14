@@ -6,36 +6,20 @@ public class Plateform : MonoBehaviour
 {
     public SpriteRenderer Sprite;
     public SpriteMask Mask;
-    public PolygonCollider2D[] Colliders => GetComponentsInChildren<PolygonCollider2D>();
 
     bool _hasKilled;
 
-    //void Start() => StartCoroutine(Logic());
 
-    private IEnumerator Logic()
+
+    void TryKillPlayers()
     {
-        yield return MoveLaPlatform();
-        yield return Effects.LerpColor((c) => Sprite.color = c, Color.white, new Color(1, 1, 1, 0), 1);
-        Destroy(gameObject);
-    }
-
-    private IEnumerator MoveLaPlatform()
-    {
-
-        while (transform.position.z > 0)
+        foreach (var player in PlayerManager.Instance.AlivePlayers)
         {
-            transform.position += Vector3.forward * Time.deltaTime * PlateformManager.Instance.PlateformMoveSpeed;
-            yield return null;
+            if(PixelPerfectCheck.Collides(this,player,1))
+                player.Kill(transform);
+
         }
-
-        var p = transform.position;
-        transform.position = new Vector3(p.x, p.y, 0);
-        KillPlayers();
-    }
-
-    void KillPlayers()
-    {
-        foreach (var c in Colliders)
+       /*  foreach (var c in Colliders)
         {
             var contacts = new Collider2D[16];
 
@@ -44,7 +28,7 @@ public class Plateform : MonoBehaviour
                 var tokill = contacts.Select(contact => contact?.GetComponentInParent<Player>()).Where(player => player != null && player.State.Equals(Player.States.Alive));
                 foreach (var tk in tokill) tk.Kill(transform);
             }
-        }
+        } */
 
         foreach (var player in FindObjectsOfType<Player>())
             if (player.IsAlive) player.Score++;
@@ -55,7 +39,7 @@ public class Plateform : MonoBehaviour
         if (transform.position.z < 0f && !_hasKilled)
         {
             _hasKilled = true;
-            KillPlayers();
+            TryKillPlayers();
         }
     }
 }

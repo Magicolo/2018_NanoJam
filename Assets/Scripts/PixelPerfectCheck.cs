@@ -14,8 +14,8 @@ public static class PixelPerfectCheck
 		var playerPPU = player.Sprite.sprite.pixelsPerUnit;
 		var pRect = player.Sprite.sprite.textureRect;
 
-		int px = (int)((player.transform.position.x + 7.3) * playerPPU);
-		int py = (int)((player.transform.position.y + 7.3) * playerPPU);
+		int px = (int)((player.transform.position.x + 12) * playerPPU);
+		int py = (int)((player.transform.position.y + 12) * playerPPU);
 
 
 		float ppuRatio = plateformPPU / playerPPU;
@@ -27,11 +27,29 @@ public static class PixelPerfectCheck
 			{
 				if (pp[(int)(y * pRect.width + x)].a != 0)
 				{
-					nbPixelCollided++;
-					if (nbPixelCollided >= nbPixelToCollide)
+					int cx = (int)((px + x) * ppuRatio);
+					int cy = (int)((py + y) * ppuRatio);
+					int index = cy * 128 + cx;
+					if (index < 0 || index >= 128 * 128 || cx >= 128 || cx < 0 || cy < 0)
 					{
-						return true;
+
 					}
+					else if (plateformPX[cy * 128 + cx].a == 0)
+					{
+						//txt.SetPixel(cx, cy, Color.green);
+					}
+
+					else
+					{
+						nbPixelCollided++;
+						//Debug.Log(nbPixelCollided);
+						if (nbPixelCollided >= nbPixelToCollide)
+						{
+							return true;
+						}
+					}
+					//txt.SetPixel(cx, cy, Color.red);
+
 				}
 			}
 		}

@@ -20,4 +20,19 @@ public class SpriteAssetPostprocessor : AssetPostprocessor
 			importer.spritePixelsPerUnit = SpriteAssetPostprocessorEditorWindow.spritePixelsPerUnit;
 		}
 	}
+
+	public static Sprite ImportSprite(Texture2D texture)
+	{
+		//texture.isReadable = true;
+
+		texture.filterMode = SpriteAssetPostprocessorEditorWindow.filterMode;
+
+		var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), SpriteAssetPostprocessorEditorWindow.spritePixelsPerUnit);
+
+		return sprite;
+		//importer.isReadable = SpriteAssetPostprocessorEditorWindow.isReadable;
+		//texture.compressionQuality = (int)SpriteAssetPostprocessorEditorWindow.compressionQuality;
+
+		//texture.spritePixelsPerUnit = SpriteAssetPostprocessorEditorWindow.spritePixelsPerUnit;
+	}
 }
