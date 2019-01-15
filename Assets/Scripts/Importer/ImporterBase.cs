@@ -7,17 +7,18 @@ using UnityEngine.Networking;
 using System.Linq;
 using System.Diagnostics;
 
-public class LevelImpoter : MonoBehaviour
+public abstract class ImporterBase<T> : MonoBehaviour where T : MonoBehaviour
 {
-	public float TunnelPixelsPerUnit = 5;
-	public float ObstaclePixelsPerUnit = 5;
-
-	private static string LevelPath = Application.streamingAssetsPath + "\\Levels";
+	protected abstract string AssetTypeName { get; }
+	protected abstract string Path { get; }
+	protected abstract KeyCode ForceReloadKey { get; }
+	protected abstract List<T> CurrentAssets { get; }
 
 
 	public bool Import;
 
-	void Awake()
+
+	protected virtual void Awake()
 	{
 		for (int i = transform.childCount - 1; i >= 0; i--)
 		{
@@ -26,25 +27,20 @@ public class LevelImpoter : MonoBehaviour
 			else
 				Destroy(transform.GetChild(i).gameObject);
 		}
-		StartCoroutine(LoadAllLevels().GetEnumerator());
-	}
-	void Start()
-	{
-
+		StartCoroutine(LoadAllAssets().GetEnumerator());
 	}
 
-	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetKeyDown(Cheat.ReloadLevel))
+		if (Input.GetKeyDown(ForceReloadKey))
 			Import = true;
 		if (!Import)
 			return;
 
-		StartCoroutine(LoadAllLevels().GetEnumerator());
+		StartCoroutine(LoadAllAssets().GetEnumerator());
 	}
 
-	IEnumerable LoadAllLevels()
+	IEnumerable LoadAllAssets()
 	{
 		Import = false;
 		File.WriteAllText(Application.streamingAssetsPath + "\\log.txt", "");
@@ -52,33 +48,28 @@ public class LevelImpoter : MonoBehaviour
 		Stopwatch watch = new Stopwatch();
 		watch.Start();
 
-		var levelDictionary = LevelManager.Instance.Levels;
 
-		DirectoryInfo directoryInfo = new DirectoryInfo(LevelPath);
-		outprint("Streaming Assets Path: " + LevelPath);
+		DirectoryInfo directoryInfo = new DirectoryInfo(Path);
+		outprint("Streaming Assets Path: " + Path);
 		outprint(directoryInfo.GetDirectories().Count() + " folders to parse");
-		foreach (var levelFolder in directoryInfo.GetDirectories())
+		foreach (var assetFolder in directoryInfo.GetDirectories())
 		{
-			var envName = levelFolder.Name;
-			Level level = null; ;
-			if (levelDictionary.Any(e => e.name == envName))
+			var assetName = assetFolder.Name;
+			T assetObject = null;
+			if (CurrentAssets.Any(e => e.name == assetName))
 			{
-				outprint("Refreshing level : " + envName);
-				level = transform.Find(envName).GetComponent<Level>();
+				outprint($"Refreshing {AssetTypeName} : {assetName}");
+				assetObject = transform.Find(assetName).GetComponent<T>();
 			}
 			else
 			{
-				outprint("New level : " + envName);
-				var newGo = new GameObject(envName);
+				outprint("New level : " + assetName);
+				var newGo = new GameObject(assetName);
 				newGo.transform.parent = this.transform;
-				level = newGo.AddComponent<Level>();
-
-				levelDictionary.Add(level);
+				assetObject = newGo.AddComponent<T>();
 			}
 
-
-			level.Obstacles = LoadSprites(levelFolder + "\\Obstacles", ObstaclePixelsPerUnit);
-			level.Tunnels = LoadSprites(levelFolder + "\\Tunnels", TunnelPixelsPerUnit);
+			LoadAsset(assetObject,assetFolder);
 
 
 			watch.Stop();
@@ -87,13 +78,15 @@ public class LevelImpoter : MonoBehaviour
 		}
 	}
 
+	protected abstract void LoadAsset(T assetObject, DirectoryInfo assetFolder);
+
 	private static void outprint(string text)
 	{
 		File.AppendAllText(Application.streamingAssetsPath + "\\log.txt", text + "\n");
 		//UnityEngine.Debug.Log(text);
 	}
 
-	private List<Sprite> LoadSprites(string path, float pixelsPerUnits)
+	protected List<Sprite> LoadSprites(string path, float pixelsPerUnits)
 	{
 		var sprites = new List<Sprite>();
 		DirectoryInfo directoryInfo = new DirectoryInfo(path);

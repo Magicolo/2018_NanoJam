@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAssetImporter : MonoBehaviour
+public class CharacterAssetManager : Singleton<CharacterAssetManager>
 {
-    // Start is called before the first frame update
+
+
+	public List<CharacterAssets> CharacterAsset = new List<CharacterAssets>();
+
     void Start()
     {
         
