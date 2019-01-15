@@ -2,7 +2,7 @@ Streaming Assets Path: C:/Users/rrail/Documents/Workspaces/2018_NanoJam/Assets/S
 2 folders to parse
 New level : Dirt
 1 Sprites to load
-2 Sprites to load
+3 Sprites to load
 Importing Done in 0s
 New level : Plane
 3 Sprites to load
