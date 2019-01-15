@@ -49,6 +49,7 @@ MonoBehaviour:
   IsMoving: 0
   MoveDirectionHA: 0
   Speed: 25
+  Bump: 3
   Sprite: {fileID: 212613017704213056}
   Collider: {fileID: 58238584288537958}
   Body: {fileID: 50047702134312708}
@@ -229,6 +230,7 @@ MonoBehaviour:
   IsMoving: 0
   MoveDirectionHA: 0
   Speed: 25
+  Bump: 3
   Sprite: {fileID: 212495756020449560}
   Collider: {fileID: 58760063364097280}
   Body: {fileID: 50530742116347368}
@@ -308,6 +310,7 @@ MonoBehaviour:
   IsMoving: 0
   MoveDirectionHA: 0
   Speed: 25
+  Bump: 3
   Sprite: {fileID: 212065338747105644}
   Collider: {fileID: 58746983194724666}
   Body: {fileID: 50244960609406076}
@@ -641,6 +644,7 @@ MonoBehaviour:
   IsMoving: 0
   MoveDirectionHA: 0
   Speed: 25
+  Bump: 3
   Sprite: {fileID: 212251951182987894}
   Collider: {fileID: 58194550653058668}
   Body: {fileID: 50942827472439662}

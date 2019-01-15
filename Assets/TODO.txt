@@ -11,8 +11,11 @@ FEATURES
 - Repulsion when players hit each other
 - Fade in at beginning of game to hide tunnel warmup
 - More obstacles
+- Banans
 - Score:
 	- 1 for each player
 	- as long as you're alive, score increases
 	- when all players are dead, game ends
-- Bug: spawning players are splatted
+
+BUGS
+- Spawning players are splatted

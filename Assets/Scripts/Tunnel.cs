@@ -19,26 +19,37 @@ public class Tunnel : MonoBehaviour
 	void Start()
 	{
 		_nextBackground = Time.time;
-		if(SpawnObstacles)
-		_nextObstacle = Time.time + 5f;
+		if (SpawnObstacles)
+			_nextObstacle = Time.time + 5f;
 	}
 
 	void Update()
 	{
-		while (_nextBackground < Time.time)
+		//Force a next obstacle
+		if (Input.GetKeyDown(KeyCode.F5))
+			_nextObstacle = Time.time;
+
+
+		while (_nextBackground <= Time.time)
 		{
+			var nextTunnelSprite = LevelManager.Instance.NextTunnel;
+
 			_nextBackground += 1f / Frequency;
 			var target = new Vector3(0f, 0f, -25f);
 			var angle = Angles[Random.Range(0, Angles.Length)];
 			var spriteRenderer = Instantiate(Particle, transform);
 			spriteRenderer.transform.eulerAngles = new Vector3(0f, 0f, angle);
+			spriteRenderer.sprite = nextTunnelSprite;
 			StartCoroutine(Spawn(spriteRenderer.transform, spriteRenderer, target));
 
-			if (_nextObstacle < Time.time && SpawnObstacles)
+			if (_nextObstacle <= Time.time && SpawnObstacles)
 			{
+				var nextObstacleSprite = LevelManager.Instance.NextObstacle;
 				_nextObstacle += 5f;
 				var obstacle = Instantiate(ObstaclePrefab, transform);
 				obstacle.Mask.sprite = spriteRenderer.sprite;
+				obstacle.Sprite.sprite = nextObstacleSprite;
+				//obstacle.transform.Rotate(0f, 0f, (int)(Random.value * 4) * 90);
 				StartCoroutine(Spawn(obstacle.transform, obstacle.Sprite, target));
 			}
 		}
