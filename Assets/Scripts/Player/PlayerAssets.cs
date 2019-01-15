@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class PlayerAssets : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public Sprite[] Straight;
+	public Sprite TransitionSprite;
+	public Sprite[] SpritesTilt;
+	public Sprite DeathSprite;
 }

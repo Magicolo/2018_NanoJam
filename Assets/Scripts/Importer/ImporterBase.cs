@@ -7,17 +7,19 @@ using UnityEngine.Networking;
 using System.Linq;
 using System.Diagnostics;
 
-public class LevelImpoter : MonoBehaviour
+public class ImporterBase<T> : MonoBehaviour where T : MonoBehaviour
 {
-	public float TunnelPixelsPerUnit = 5;
-	public float ObstaclePixelsPerUnit = 5;
-
 	private static string LevelPath = Application.streamingAssetsPath + "\\Levels";
+
+	protected virtual string Path { get { return ""; } }
+	protected virtual KeyCode ForceReloadKey { get { return KeyCode.ScrollLock; } }
+	protected virtual List<T> CurrentAssets { get { return null; } }
 
 
 	public bool Import;
 
-	void Awake()
+
+	protected virtual void Awake()
 	{
 		for (int i = transform.childCount - 1; i >= 0; i--)
 		{
@@ -26,25 +28,20 @@ public class LevelImpoter : MonoBehaviour
 			else
 				Destroy(transform.GetChild(i).gameObject);
 		}
-		StartCoroutine(LoadAllLevels().GetEnumerator());
-	}
-	void Start()
-	{
-
+		StartCoroutine(LoadAllAssets().GetEnumerator());
 	}
 
-	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetKeyDown(Cheat.ReloadLevel))
+		if (Input.GetKeyDown(ForceReloadKey))
 			Import = true;
 		if (!Import)
 			return;
 
-		StartCoroutine(LoadAllLevels().GetEnumerator());
+		StartCoroutine(LoadAllAssets().GetEnumerator());
 	}
 
-	IEnumerable LoadAllLevels()
+	IEnumerable LoadAllAssets()
 	{
 		Import = false;
 		File.WriteAllText(Application.streamingAssetsPath + "\\log.txt", "");
@@ -52,7 +49,6 @@ public class LevelImpoter : MonoBehaviour
 		Stopwatch watch = new Stopwatch();
 		watch.Start();
 
-		var levelDictionary = LevelManager.Instance.Levels;
 
 		DirectoryInfo directoryInfo = new DirectoryInfo(LevelPath);
 		outprint("Streaming Assets Path: " + LevelPath);
@@ -61,7 +57,7 @@ public class LevelImpoter : MonoBehaviour
 		{
 			var envName = levelFolder.Name;
 			Level level = null; ;
-			if (levelDictionary.Any(e => e.name == envName))
+			if (CurrentAssets.Any(e => e.name == envName))
 			{
 				outprint("Refreshing level : " + envName);
 				level = transform.Find(envName).GetComponent<Level>();
@@ -73,12 +69,12 @@ public class LevelImpoter : MonoBehaviour
 				newGo.transform.parent = this.transform;
 				level = newGo.AddComponent<Level>();
 
-				levelDictionary.Add(level);
+				//CurrentAssets.Add(level);
 			}
 
 
-			level.Obstacles = LoadSprites(levelFolder + "\\Obstacles", ObstaclePixelsPerUnit);
-			level.Tunnels = LoadSprites(levelFolder + "\\Tunnels", TunnelPixelsPerUnit);
+			/* level.Obstacles = LoadSprites(levelFolder + "\\Obstacles", ObstaclePixelsPerUnit);
+			level.Tunnels = LoadSprites(levelFolder + "\\Tunnels", TunnelPixelsPerUnit); */
 
 
 			watch.Stop();
