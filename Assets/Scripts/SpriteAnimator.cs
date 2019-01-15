@@ -16,6 +16,7 @@ public class SpriteAnimator : MonoBehaviour
 	public enum AnimationState { Left, TransitionLeft, Center, TransitionRight, Right }
 
 	public bool IsMoving { get { return GetComponentInParent<Player>().IsMoving; } }
+	private bool IsInTransition { get { return AnimState == AnimationState.TransitionLeft || AnimState == AnimationState.TransitionRight; } }
 
 	private float LastDirection = 0;
 
@@ -52,7 +53,7 @@ public class SpriteAnimator : MonoBehaviour
 				//print(MyPlayer.Body.velocity.x);
 				if (MyPlayer.MoveDirectionInputRaw == 0)
 				{
-					if (Mathf.Abs(MyPlayer.Body.velocity.x) < SpriteCenteringThreshold)
+					if (Mathf.Abs(MyPlayer.Body.velocity.x) < SpriteCenteringThreshold || IsInTransition)
 						MoveAnimCenter();
 				}
 				else if (MyPlayer.Body.velocity.x > 0)

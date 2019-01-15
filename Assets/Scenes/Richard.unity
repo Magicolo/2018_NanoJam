@@ -802,6 +802,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 15bda357773ca1a4aaf4418e7f9b8604,
         type: 3}
+    - target: {fileID: 5455172309582754711, guid: beb1f11677e0d3948adc93a0162e13f8,
+        type: 3}
+      propertyPath: DeathSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 422163281f3a23847b1db4f0c6debb08,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beb1f11677e0d3948adc93a0162e13f8, type: 3}
 --- !u!213 &1066936870
@@ -1256,6 +1262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3371cc32d4f39124080a21221874bb18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Import: 0
 --- !u!114 &1497818352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1268,7 +1275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9dc0b3520353b6498e1f52a3791b36d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerAsset: []
+  CharacterAsset: []
 --- !u!4 &1497818353
 Transform:
   m_ObjectHideFlags: 0
