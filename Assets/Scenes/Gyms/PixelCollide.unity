@@ -537,15 +537,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 331114160208130644, guid: 90f31a4e87f250e4e8c09d69f37f0455,
-        type: 3}
-      propertyPath: bob
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 331114160208130644, guid: 90f31a4e87f250e4e8c09d69f37f0455,
-        type: 3}
-      propertyPath: SpriteCenteringThreshold
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90f31a4e87f250e4e8c09d69f37f0455, type: 3}

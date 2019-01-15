@@ -173,3 +173,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sprite: {fileID: 6113249547741790655}
   Mask: {fileID: 5312266100719829486}
+  NbPixelForContact: 10

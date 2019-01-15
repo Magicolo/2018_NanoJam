@@ -61,7 +61,7 @@ public class LevelImpoter : MonoBehaviour
 		{
 			var envName = levelFolder.Name;
 			Level level = null; ;
-			if (levelDictionary.ContainsKey(envName))
+			if (levelDictionary.Any(e => e.name == envName))
 			{
 				outprint("Refreshing level : " + envName);
 				level = transform.Find(envName).GetComponent<Level>();
@@ -72,8 +72,8 @@ public class LevelImpoter : MonoBehaviour
 				var newGo = new GameObject(envName);
 				newGo.transform.parent = this.transform;
 				level = newGo.AddComponent<Level>();
-			
-				levelDictionary.Add(envName, level);
+
+				levelDictionary.Add(level);
 			}
 
 
@@ -90,7 +90,7 @@ public class LevelImpoter : MonoBehaviour
 	private static void outprint(string text)
 	{
 		File.AppendAllText(Application.streamingAssetsPath + "\\log.txt", text + "\n");
-		UnityEngine.Debug.Log(text);
+		//UnityEngine.Debug.Log(text);
 	}
 
 	private List<Sprite> LoadSprites(string path, float pixelsPerUnits)

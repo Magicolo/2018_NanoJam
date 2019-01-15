@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 public class PlayerManager : Singleton<PlayerManager>
 {
-	public Player[] Players;
+	public List<Player> Players;
 
 	public Player GetPlayer(int id)
 	{
-		if (id >= Players.Length)
+		if (id >= Players.Count)
 			return null;
 		else
 			return Players[id];

@@ -9,13 +9,15 @@ using UnityEngine;
 public class LevelManager : Singleton<LevelManager>
 {
 
-	public Dictionary<string, Level> Levels = new Dictionary<string, Level>();
+	public List<Level> Levels = new List<Level>();
+
+	public int CurrentLevelIndex;
 
 	public Sprite NextTunnel
 	{
 		get
 		{
-			var env = Levels.First().Value;
+			var env = Levels[CurrentLevelIndex];
 			return env.Tunnels[UnityEngine.Random.Range(0, env.Tunnels.Count)];
 		}
 	}
@@ -24,7 +26,7 @@ public class LevelManager : Singleton<LevelManager>
 	{
 		get
 		{
-			var env = Levels.First().Value;
+			var env = Levels[CurrentLevelIndex];
 			return env.Obstacles[UnityEngine.Random.Range(0, env.Obstacles.Count)];
 		}
 	}
@@ -32,21 +34,13 @@ public class LevelManager : Singleton<LevelManager>
 	protected override void Awake()
 	{
 		base.Awake();
-		/* foreach (var d in Directory.GetDirectories(@"Assets\Resources\Sprite\Environnement"))
-		{
-			var splitted = d.Split('\\');
-			var resourceFolder = string.Join("\\", splitted.Skip(2).ToArray());
-			var environnementName = d.Split('\\').Last();
-			var rs = Resources.LoadAll(resourceFolder);
-			var sprites = rs.Where(x => x.GetType() == typeof(Sprite)).Select(x => (Sprite)x).ToList();
-			//Debug.Log(environnementName + " - " + sprites.Count);
-			//Environnements.Add(environnementName, sprites);
-		} */
+		
 	}
 
-	// Update is called once per frame
 	void Update()
 	{
-
+		if(Input.GetKeyDown(KeyCode.F6)){
+			CurrentLevelIndex = (CurrentLevelIndex+1) % Levels.Count;
+		}
 	}
 }
