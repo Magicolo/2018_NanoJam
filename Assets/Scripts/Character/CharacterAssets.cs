@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAssets : MonoBehaviour
+public class CharacterAssets : MonoBehaviour
 {
 
 	public Sprite[] Straight;

@@ -7,13 +7,12 @@ using UnityEngine.Networking;
 using System.Linq;
 using System.Diagnostics;
 
-public class ImporterBase<T> : MonoBehaviour where T : MonoBehaviour
+public abstract class ImporterBase<T> : MonoBehaviour where T : MonoBehaviour
 {
-	private static string LevelPath = Application.streamingAssetsPath + "\\Levels";
-
-	protected virtual string Path { get { return ""; } }
-	protected virtual KeyCode ForceReloadKey { get { return KeyCode.ScrollLock; } }
-	protected virtual List<T> CurrentAssets { get { return null; } }
+	protected abstract string AssetTypeName { get; }
+	protected abstract string Path { get; }
+	protected abstract KeyCode ForceReloadKey { get; }
+	protected abstract List<T> CurrentAssets { get; }
 
 
 	public bool Import;
@@ -50,31 +49,27 @@ public class ImporterBase<T> : MonoBehaviour where T : MonoBehaviour
 		watch.Start();
 
 
-		DirectoryInfo directoryInfo = new DirectoryInfo(LevelPath);
-		outprint("Streaming Assets Path: " + LevelPath);
+		DirectoryInfo directoryInfo = new DirectoryInfo(Path);
+		outprint("Streaming Assets Path: " + Path);
 		outprint(directoryInfo.GetDirectories().Count() + " folders to parse");
-		foreach (var levelFolder in directoryInfo.GetDirectories())
+		foreach (var assetFolder in directoryInfo.GetDirectories())
 		{
-			var envName = levelFolder.Name;
-			Level level = null; ;
-			if (CurrentAssets.Any(e => e.name == envName))
+			var assetName = assetFolder.Name;
+			T assetObject = null;
+			if (CurrentAssets.Any(e => e.name == assetName))
 			{
-				outprint("Refreshing level : " + envName);
-				level = transform.Find(envName).GetComponent<Level>();
+				outprint($"Refreshing {AssetTypeName} : {assetName}");
+				assetObject = transform.Find(assetName).GetComponent<T>();
 			}
 			else
 			{
-				outprint("New level : " + envName);
-				var newGo = new GameObject(envName);
+				outprint("New level : " + assetName);
+				var newGo = new GameObject(assetName);
 				newGo.transform.parent = this.transform;
-				level = newGo.AddComponent<Level>();
-
-				//CurrentAssets.Add(level);
+				assetObject = newGo.AddComponent<T>();
 			}
 
-
-			/* level.Obstacles = LoadSprites(levelFolder + "\\Obstacles", ObstaclePixelsPerUnit);
-			level.Tunnels = LoadSprites(levelFolder + "\\Tunnels", TunnelPixelsPerUnit); */
+			LoadAsset(assetObject,assetFolder);
 
 
 			watch.Stop();
@@ -83,13 +78,15 @@ public class ImporterBase<T> : MonoBehaviour where T : MonoBehaviour
 		}
 	}
 
+	protected abstract void LoadAsset(T assetObject, DirectoryInfo assetFolder);
+
 	private static void outprint(string text)
 	{
 		File.AppendAllText(Application.streamingAssetsPath + "\\log.txt", text + "\n");
 		//UnityEngine.Debug.Log(text);
 	}
 
-	private List<Sprite> LoadSprites(string path, float pixelsPerUnits)
+	protected List<Sprite> LoadSprites(string path, float pixelsPerUnits)
 	{
 		var sprites = new List<Sprite>();
 		DirectoryInfo directoryInfo = new DirectoryInfo(path);
