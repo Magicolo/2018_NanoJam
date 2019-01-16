@@ -6,11 +6,13 @@ public class Tunnel : MonoBehaviour
 	public SpriteRenderer Particle;
 	public Plateform ObstaclePrefab;
 	public float Frequency = 10f;
+	public float TimeBetweenObstacles = 5f;
 	public float Duration = 1f;
 	public float RandomColor = 0.1f;
 	public float[] Angles = { 0f, 90f, 180f, 270f };
 	public Gradient Gradient;
 	public AnimationCurve Curve = AnimationCurve.Linear(0, 0, 1f, 1f);
+	public int Order = int.MaxValue;
 
 	float _nextBackground;
 	float _nextObstacle;
@@ -45,10 +47,12 @@ public class Tunnel : MonoBehaviour
 			if (_nextObstacle <= Time.time && SpawnObstacles)
 			{
 				var nextObstacleSprite = LevelManager.Instance.NextObstacle;
-				_nextObstacle += 5f;
+				_nextObstacle += TimeBetweenObstacles;
 				var obstacle = Instantiate(ObstaclePrefab, transform);
 				obstacle.Mask.sprite = spriteRenderer.sprite;
+				obstacle.Mask.enabled = true;
 				obstacle.Sprite.sprite = nextObstacleSprite;
+				//obstacle.Sprite.sortingOrder = Order--;
 				//obstacle.transform.Rotate(0f, 0f, (int)(Random.value * 4) * 90);
 				StartCoroutine(Spawn(obstacle.transform, obstacle.Sprite, target));
 			}

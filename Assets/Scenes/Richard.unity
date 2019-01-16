@@ -224,6 +224,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 144277710062501629, guid: f069a52b3492c294289ef4efef279c1b,
+        type: 3}
+      propertyPath: Frequency
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 144277710062501629, guid: f069a52b3492c294289ef4efef279c1b,
+        type: 3}
+      propertyPath: TimeBetweenObstacles
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f069a52b3492c294289ef4efef279c1b, type: 3}
 --- !u!1001 &299501578
@@ -806,7 +816,7 @@ PrefabInstance:
         type: 3}
       propertyPath: DeathSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 422163281f3a23847b1db4f0c6debb08,
+      objectReference: {fileID: 21300000, guid: 050b449465db801408f2798040f55332,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beb1f11677e0d3948adc93a0162e13f8, type: 3}
@@ -1595,6 +1605,11 @@ PrefabInstance:
     - target: {fileID: 224756378668138042, guid: 9f3792bd2e77c0149a3172e2febd0df7,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114745075106092504, guid: 9f3792bd2e77c0149a3172e2febd0df7,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

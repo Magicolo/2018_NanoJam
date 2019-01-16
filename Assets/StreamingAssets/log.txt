@@ -1,4 +1,4 @@
-New level : Plane
+Refreshing level : Plane
 3 Sprites to load
 1 Sprites to load
 Importing Done in 0s
