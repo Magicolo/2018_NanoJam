@@ -116,6 +116,7 @@ public class LevelImpoter : MonoBehaviour
 		{
 			fileData = File.ReadAllBytes(filePath);
 			tex = new Texture2D(1, 1);
+			tex.filterMode = FilterMode.Point;
 			tex.LoadImage(fileData); //..this will auto-resize the texture dimensions.
 		}
 		else

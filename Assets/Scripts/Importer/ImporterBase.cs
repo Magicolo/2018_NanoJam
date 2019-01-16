@@ -49,7 +49,7 @@ public abstract class ImporterBase<T> : MonoBehaviour where T : MonoBehaviour
 		watch.Start();
 
 
-		DirectoryInfo directoryInfo = new DirectoryInfo(Path);
+		/* DirectoryInfo directoryInfo = new DirectoryInfo(Path);
 		outprint("Streaming Assets Path: " + Path);
 		outprint(directoryInfo.GetDirectories().Count() + " folders to parse");
 		foreach (var assetFolder in directoryInfo.GetDirectories())
@@ -75,7 +75,8 @@ public abstract class ImporterBase<T> : MonoBehaviour where T : MonoBehaviour
 			watch.Stop();
 			outprint("Importing Done in " + watch.ElapsedMilliseconds / 1000 + "s");
 			yield return null;
-		}
+		} */
+		yield return null;
 	}
 
 	protected abstract void LoadAsset(T assetObject, DirectoryInfo assetFolder);

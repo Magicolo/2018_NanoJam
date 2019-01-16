@@ -1651,6 +1651,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlowMoManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7629280941060179574, guid: 97ef03e9388796241ad3a369fd34b4f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1903451034940039173, guid: 97ef03e9388796241ad3a369fd34b4f6,
         type: 3}
       propertyPath: m_LocalPosition.x

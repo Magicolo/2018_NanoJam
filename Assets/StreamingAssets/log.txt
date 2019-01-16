@@ -1,4 +1,3 @@
-Streaming Assets Path: Characters
 New level : Plane
 3 Sprites to load
 1 Sprites to load
