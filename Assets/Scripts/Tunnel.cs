@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class Tunnel : MonoBehaviour
+public class Tunnel : Singleton<Tunnel>
 {
 	public SpriteRenderer Particle;
 	public Plateform ObstaclePrefab;
@@ -42,7 +42,7 @@ public class Tunnel : MonoBehaviour
 			var spriteRenderer = Instantiate(Particle, transform);
 			spriteRenderer.transform.eulerAngles = new Vector3(0f, 0f, angle);
 			spriteRenderer.sprite = nextTunnelSprite;
-			StartCoroutine(Spawn(spriteRenderer.transform, spriteRenderer, target));
+			StartCoroutine(Spawn(spriteRenderer.transform, spriteRenderer, target, Gradient));
 
 			if (_nextObstacle <= Time.time && SpawnObstacles)
 			{
@@ -54,12 +54,12 @@ public class Tunnel : MonoBehaviour
 				obstacle.Sprite.sprite = nextObstacleSprite;
 				//obstacle.Sprite.sortingOrder = Order--;
 				//obstacle.transform.Rotate(0f, 0f, (int)(Random.value * 4) * 90);
-				StartCoroutine(Spawn(obstacle.transform, obstacle.Sprite, target));
+				StartCoroutine(Spawn(obstacle.transform, obstacle.Sprite, target, Gradient));
 			}
 		}
 	}
 
-	IEnumerator Spawn(Transform instance, SpriteRenderer spriteRenderer, Vector3 target)
+	IEnumerator Spawn(Transform instance, SpriteRenderer spriteRenderer, Vector3 target, Gradient gradient)
 	{
 		var initialPosition = instance.position;
 		var initialColor = spriteRenderer.color + Random.ColorHSV(-RandomColor, RandomColor, -RandomColor, RandomColor, -RandomColor, RandomColor);
@@ -75,7 +75,7 @@ public class Tunnel : MonoBehaviour
 
 			var time = ratio + (1f / Duration) * Time.deltaTime;
 			var position = difference * Curve.Evaluate(time) + initialPosition;
-			var color = initialColor * Gradient.Evaluate(time);
+			var color = initialColor * gradient.Evaluate(time);
 			instance.position = position;
 			spriteRenderer.color = color;
 			yield return null;

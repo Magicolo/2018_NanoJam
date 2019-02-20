@@ -11,7 +11,19 @@ public class LevelManager : Singleton<LevelManager>
 
 	public List<Level> Levels = new List<Level>();
 
-	public int CurrentLevelIndex;
+	private int _currentLevelIndex = 0;
+	public int CurrentLevelIndex
+	{
+		set
+		{
+			_currentLevelIndex = value;
+			Tunnel.Instance.Gradient = Levels[CurrentLevelIndex].TunnelGradient;
+		}
+		get
+		{
+			return _currentLevelIndex;
+		}
+	}
 
 	public Sprite NextTunnel
 	{
@@ -34,13 +46,14 @@ public class LevelManager : Singleton<LevelManager>
 	protected override void Awake()
 	{
 		base.Awake();
-		
+
 	}
 
 	void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.F6)){
-			CurrentLevelIndex = (CurrentLevelIndex+1) % Levels.Count;
+		if (Input.GetKeyDown(KeyCode.F6))
+		{
+			CurrentLevelIndex = (CurrentLevelIndex + 1) % Levels.Count;
 		}
 	}
 }

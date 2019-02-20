@@ -79,12 +79,29 @@ public class LevelImpoter : MonoBehaviour
 
 			level.Obstacles = LoadSprites(levelFolder + "\\Obstacles", ObstaclePixelsPerUnit);
 			level.Tunnels = LoadSprites(levelFolder + "\\Tunnels", TunnelPixelsPerUnit);
+			level.TunnelGradient = LoadGradient(levelFolder + "\\Gradient.png");
 
 
 			watch.Stop();
 			outprint("Importing Done in " + watch.ElapsedMilliseconds / 1000 + "s");
 			yield return null;
 		}
+	}
+
+	private Gradient LoadGradient(string path)
+	{
+		var gradient = new Gradient();
+
+		var img = LoadTexture(path);
+		var pixels = img.GetPixels();
+
+		var colorKeys = new GradientColorKey[pixels.Count()];
+		for (int i = 0; i < pixels.Count(); i++)
+			colorKeys[i] = new GradientColorKey(pixels[i],i*1f/(pixels.Count()-1));
+
+		gradient.colorKeys = colorKeys;
+
+		return gradient;
 	}
 
 	private static void outprint(string text)
@@ -106,7 +123,7 @@ public class LevelImpoter : MonoBehaviour
 		return sprites;
 	}
 
-	public static Sprite LoadPNG(string filePath, float pixelsPerUnits)
+	public static Texture2D LoadTexture(string filePath)
 	{
 
 		Texture2D tex = null;
@@ -125,6 +142,12 @@ public class LevelImpoter : MonoBehaviour
 		}
 
 		tex.filterMode = FilterMode.Point;
+		return tex;
+	}
+
+	public static Sprite LoadPNG(string filePath, float pixelsPerUnits)
+	{
+		var tex = LoadTexture(filePath);
 		var sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), pixelsPerUnits);
 		return sprite;
 	}

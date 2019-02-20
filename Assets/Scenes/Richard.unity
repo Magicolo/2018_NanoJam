@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -243,9 +243,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1366592481}
     m_Modifications:
-    - target: {fileID: 1192728386308006, guid: 90f31a4e87f250e4e8c09d69f37f0455, type: 3}
-      propertyPath: m_Name
-      value: Player2
+    - target: {fileID: 114159027874716678, guid: 90f31a4e87f250e4e8c09d69f37f0455,
+        type: 3}
+      propertyPath: Horizontal
+      value: Horizontal2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114159027874716678, guid: 90f31a4e87f250e4e8c09d69f37f0455,
+        type: 3}
+      propertyPath: Vertical
+      value: Vertical2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114159027874716678, guid: 90f31a4e87f250e4e8c09d69f37f0455,
+        type: 3}
+      propertyPath: Bump
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4120984159336400, guid: 90f31a4e87f250e4e8c09d69f37f0455, type: 3}
       propertyPath: m_LocalPosition.x
@@ -291,20 +302,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114159027874716678, guid: 90f31a4e87f250e4e8c09d69f37f0455,
-        type: 3}
-      propertyPath: Horizontal
-      value: Horizontal2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114159027874716678, guid: 90f31a4e87f250e4e8c09d69f37f0455,
-        type: 3}
-      propertyPath: Vertical
-      value: Vertical2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114159027874716678, guid: 90f31a4e87f250e4e8c09d69f37f0455,
-        type: 3}
-      propertyPath: Bump
-      value: 2
+    - target: {fileID: 1192728386308006, guid: 90f31a4e87f250e4e8c09d69f37f0455, type: 3}
+      propertyPath: m_Name
+      value: Player2
       objectReference: {fileID: 0}
     - target: {fileID: 212000820245868118, guid: 90f31a4e87f250e4e8c09d69f37f0455,
         type: 3}
@@ -1795,5 +1795,9 @@ PrefabInstance:
       propertyPath: Tunnels.Array.data[1]
       value: 
       objectReference: {fileID: 709813755}
+    - target: {fileID: 890864246, guid: b5d9fa994c0d0d54d9e722dc56d91d8e, type: 3}
+      propertyPath: Levels.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5d9fa994c0d0d54d9e722dc56d91d8e, type: 3}
