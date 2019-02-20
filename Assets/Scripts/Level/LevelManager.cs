@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,13 +18,15 @@ public class LevelManager : Singleton<LevelManager>
 		set
 		{
 			_currentLevelIndex = value;
-			Tunnel.Instance.Gradient = Levels[CurrentLevelIndex].TunnelGradient;
+			OnCurrentLevelChanged?.Invoke(Levels[CurrentLevelIndex]);
 		}
 		get
 		{
 			return _currentLevelIndex;
 		}
 	}
+
+	public Action<Level> OnCurrentLevelChanged;
 
 	public Sprite NextTunnel
 	{

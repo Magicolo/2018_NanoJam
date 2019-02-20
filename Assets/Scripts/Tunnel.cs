@@ -5,6 +5,7 @@ public class Tunnel : Singleton<Tunnel>
 {
 	public SpriteRenderer Particle;
 	public Plateform ObstaclePrefab;
+	public SpriteRenderer Background;
 	public float Frequency = 10f;
 	public float TimeBetweenObstacles = 5f;
 	public float Duration = 1f;
@@ -20,9 +21,16 @@ public class Tunnel : Singleton<Tunnel>
 
 	void Start()
 	{
+		LevelManager.Instance.OnCurrentLevelChanged += LevelChanged;
 		_nextBackground = Time.time;
 		if (SpawnObstacles)
 			_nextObstacle = Time.time + 5f;
+	}
+
+	void LevelChanged(Level level)
+	{
+		Gradient = level.TunnelGradient;
+		Background.color = level.TunnelGradient.colorKeys[0].color;
 	}
 
 	void Update()
