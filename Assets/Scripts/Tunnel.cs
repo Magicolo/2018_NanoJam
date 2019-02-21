@@ -5,7 +5,7 @@ public class Tunnel : Singleton<Tunnel>
 {
 	public SpriteRenderer Particle;
 	public Plateform ObstaclePrefab;
-	public SpriteRenderer Background;
+	public Camera GameCamera;
 	public float Frequency = 10f;
 	public float TimeBetweenObstacles = 5f;
 	public float Duration = 1f;
@@ -29,8 +29,8 @@ public class Tunnel : Singleton<Tunnel>
 
 	void LevelChanged(Level level)
 	{
-		Gradient = level.TunnelGradient;
-		Background.color = level.TunnelGradient.colorKeys[0].color;
+		//Gradient = level.TunnelGradient;
+		GameCamera.backgroundColor = level.TunnelGradient.colorKeys[0].color;
 	}
 
 	void Update()
@@ -83,7 +83,7 @@ public class Tunnel : Singleton<Tunnel>
 
 			var time = ratio + (1f / Duration) * Time.deltaTime;
 			var position = difference * Curve.Evaluate(time) + initialPosition;
-			var color = initialColor * gradient.Evaluate(time);
+			var color = /* initialColor *  */gradient.Evaluate(time);
 			instance.position = position;
 			spriteRenderer.color = color;
 			yield return null;
